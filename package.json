@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "@babel/core": "^7.20.12",
     "parcel": "^2.8.3"
   },
   "dependencies": {
@@ -9,7 +10,6 @@
   "name": "namaste-react-akshay",
   "version": "1.0.0",
   "description": "namaste react",
-  "main": "index.js",
   "scripts": {
     "start": "parcel index.html",
     "build": "parcel build index.html",
