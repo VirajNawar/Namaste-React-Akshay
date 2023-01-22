@@ -13,7 +13,7 @@ const RestaurantCard = ({
             cloudinaryImageId
           }
           alt="card-1"
-          className="card-logo "
+          className="card-logo"
         />
         <h2> {name} </h2> <h4> {cuisines.join(", ")} </h4>{" "}
         <h5> {lastMileTravelString} </h5>

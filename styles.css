@@ -54,3 +54,13 @@
     margin-bottom: 0.6em;
   
   }
+
+  .shimmer__card__logo{
+    padding: 2.4em;
+    background-color: #E5E4E5 ;
+  }
+
+  .shimmer__card__title{
+    padding: .4em;
+    background-color: #E5E4E5;
+  }

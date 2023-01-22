@@ -1,42 +1,66 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { restrauntList } from "../config";
 import RestaurantCard from "./RestaurantCard";
+import ShimmerUi from "./ShimmerUi";
 
 const Body = () => {
-  const [searchText, setSearchText] = useState("")
+  const [searchText, setSearchText] = useState("");
 
-  const [restaurantData, setRestaurantData] = useState(restrauntList)
+  const [allRestaurantData, setAllRestaurantData] = useState([]);
+  const [filteredRestaurantData, setFilteredRestaurantData] = useState([]);
 
-  const handleInput = (e) =>{
-      setSearchText(e.target.value);
+  const handleInput = (e) => {
+    setSearchText(e.target.value);
+  };
+
+  useEffect(() => {
+    getRestaurants();
+  }, []);
+
+  async function getRestaurants() {
+    const data = await fetch(
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.4922285&lng=73.9000204&page_type=DESKTOP_WEB_LISTING"
+    );
+    const json = await data.json();
+    console.log(json);
+    setAllRestaurantData(json.data?.cards[2]?.data?.data?.cards);
+    setFilteredRestaurantData(json.data?.cards[2]?.data?.data?.cards);
   }
 
-  function filterData(searchText, restaurantData){
-    const filteredData = restaurantData.filter((datas)=>
-      datas.data.name.includes(searchText)
-    )
+  function filterData(searchText, allRestaurantData) {
+    const filteredData = allRestaurantData.filter((datas) =>
+      datas?.data?.name?.toLowerCase()?.includes(searchText.toLowerCase())
+    );
 
-    return filteredData
+    return filteredData;
   }
-  return (
+
+  if(!allRestaurantData) return null
+
+  return allRestaurantData.length === 0 ? (
+    <ShimmerUi />
+  ) : (
     <>
       <div className="search-container">
-        <input 
-        type="text" 
-        className="search-input" 
-        placeholder="Search Here" 
-        value={searchText}
-        onChange= {handleInput}
+        <input
+          type="text"
+          className="search-input"
+          placeholder="Search Here"
+          value={searchText}
+          onChange={handleInput}
         />
-        <button 
-        onClick={()=>  {
-         const data = filterData(searchText, restaurantData)
-          setRestaurantData(data)
-          }}>Search</button>  
+        <button
+          onClick={() => {
+            const data = filterData(searchText, allRestaurantData);
+            setFilteredRestaurantData(data);
+          }}
+        >
+          Search
+        </button>
       </div>
-      
+
       <div className="body">
-        {restaurantData.map((list) => {
+        {filteredRestaurantData.map((list) => {
           return <RestaurantCard {...list.data} key={list.data.id} />;
         })}
       </div>
