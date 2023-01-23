@@ -3,30 +3,16 @@ import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
 import Footer from "./components/Footer"
-/* 
-App Structure
+import About from "./components/About";
+import Error from "./components/Error";
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 
----Header
-    --Logo
-    --Nav Links
-        -Home
-        -About us
-        -Cart
----Body
-    --Restaurant Card
-     -Hotel Name
-     -Image
-     -description
----Footer
-    --Resources Links
-    --Copyright
-*/
 
 const AppLayout = () => {
   return (
     <div>
       <Header />
-      <Body />
+      <Outlet />
       <Footer />
     </div>
   );
@@ -34,8 +20,26 @@ const AppLayout = () => {
 
 
 
+const appRouter = createBrowserRouter([
+  {
+    path:"/",
+    element:<AppLayout />,
+    errorElement : <Error />,
+    children:[
+      {
+        path:"/",
+        element:<Body />,
+      },
+      {
+        path:"/About",
+        element:<About />,
+      }
+    ]
+  },
+ 
+])
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-root.render(<AppLayout />);
+root.render(<RouterProvider  router={appRouter} />);

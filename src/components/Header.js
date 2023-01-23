@@ -1,14 +1,21 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
     <div className="header">
+      <a href="/">
       <img src="" alt="logo" />
+      </a>
       <div className="nav">
         <ul className="nav--links">
-          <li> Home </li>
+          <Link to="/">
+          <li> Home </li>        
+          </Link>
+          <Link to="/about">
           <li> About </li>
+          </Link>
           <li> Contact </li>
           <li> Cart </li>
           <li>
