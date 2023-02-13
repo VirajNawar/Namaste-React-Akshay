@@ -6,23 +6,29 @@ const Header = () => {
   return (
     <div className="header">
       <a href="/">
-      <img src="" alt="logo" />
+        <img src="" alt="logo" />
       </a>
       <div className="nav">
         <ul className="nav--links">
           <Link to="/">
-          <li> Home </li>        
+            <li>Home</li>
           </Link>
           <Link to="/about">
-          <li> About </li>
+            <li>About</li>
           </Link>
-          <li> Contact </li>
+          <Link to="/contact">
+            <li>Contact</li>
+          </Link>
           <li> Cart </li>
           <li>
             {isLoggedIn ? (
-              <button id="logout__btn" onClick={() => setIsLoggedIn(false)}>Logout</button>
+              <button id="logout__btn" onClick={() => setIsLoggedIn(false)}>
+                Logout
+              </button>
             ) : (
-              <button id="login__btn" onClick={() => setIsLoggedIn(true)}>Login</button>
+              <button id="login__btn" onClick={() => setIsLoggedIn(true)}>
+                Login
+              </button>
             )}
           </li>
         </ul>

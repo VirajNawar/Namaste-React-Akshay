@@ -15,14 +15,14 @@ class About extends Component {
   }
 
   componentDidMount() {
-    this.timer = setInterval(()=>{
-        console.log("About Interval");
-    },1000)
+    // this.timer = setInterval(()=>{
+    //     console.log("About Interval");
+    // },1000)
     console.log("Component Did Mount");
   }
 
   componentWillUnmount(){
-    clearInterval(this.timer)
+    // clearInterval(this.timer)
     console.log("Will Unmount");
   }
 
