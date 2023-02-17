@@ -1,8 +1,12 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
+import UserContext from "../utils/userContext";
+
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const {user} = useContext(UserContext)
   return (
     <div className="header">
       <a href="/">
@@ -19,10 +23,15 @@ const Header = () => {
           <Link to="/contact">
             <li>Contact</li>
           </Link>
+          <Link to="/gmart">
+            <li>G-Mart</li>
+          </Link>
           <li> Cart </li>
           <li>
+            <span className="mr-3 font-semibold">{user.name}</span>
             {isLoggedIn ? (
-              <button id="logout__btn" onClick={() => setIsLoggedIn(false)}>
+             
+              <button className="mx-2" id="logout__btn" onClick={() => setIsLoggedIn(false)}>
                 Logout
               </button>
             ) : (

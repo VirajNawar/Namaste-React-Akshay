@@ -1,17 +1,15 @@
-// const About = () => {
-// return(
-//     <div>
-//         <h1>This is the About Us Page</h1>
-//     </div>
-// )
-// }
 
 import { Component } from "react";
+import UserContext from '../utils/userContext';
+
+
+
 
 class About extends Component {
   constructor(props) {
     super(props);
     console.log("Constructor");
+    
   }
 
   componentDidMount() {
@@ -30,7 +28,12 @@ class About extends Component {
     console.log("Render");
     return (
       <div>
-        <h1>This is the About Us Page</h1>
+        <h1>This is the About Us Page </h1>
+       <UserContext.Consumer>
+          {({user})=>(
+            <span>{user.name}</span>
+          )}
+       </UserContext.Consumer>
       </div>
     );
   }
